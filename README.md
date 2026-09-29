@@ -38,8 +38,8 @@ class CrachaApp extends StatelessWidget {
               // ===============================================================
               gradient: const LinearGradient(
                 colors: [
-                  // TODO: White,
-                  // TODO: Blue,
+                 backgroundColor: White,
+                 foregroundColor: Blue,
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -56,7 +56,7 @@ class CrachaApp extends StatelessWidget {
                 const CircleAvatar(
                   radius: 50,
                   // TODO: Adicione a propriedade backgroundImage usando NetworkImage
-                  // URL: '
+                  // URL de teste: 'https://www.newgrounds.com/art/view/taroleche/kris'
                 ),
 
                 const SizedBox(height: 15),
@@ -95,9 +95,9 @@ class CrachaApp extends StatelessWidget {
                   children: [
                   Chip(label: Text('Dart')),
                     SizedBox(width: 5),
-                    // TODO: Adicione o segundo Chip aqui ('Flutter'),
+                    Chip(label: Text('Flutter')),
                     SizedBox(width: 5),
-                    // TODO: Adicione o terceiro Chip aqui ('Git'),
+                    Chip((label: Text('Git'))
                   ],
                 ),
 
