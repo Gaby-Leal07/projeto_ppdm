@@ -41,15 +41,10 @@ class CartaoCracha extends StatelessWidget {
       width: 320,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        // EXERCÍCIO 4: Fundo gradiente aplicado no BoxDecoration
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Colors.white,
-            Colors.blue.shade50,
-            Colors.blue.shade100,
-          ],
+          colors: [Colors.white, Colors.blue.shade50, Colors.blue.shade100],
         ),
         borderRadius: BorderRadius.circular(15),
         boxShadow: const [
@@ -63,17 +58,47 @@ class CartaoCracha extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // EXERCÍCIO 1: CircleAvatar com NetworkImage
-          const CircleAvatar(
-            radius: 50,
-            backgroundColor: Colors.blueAccent,
-            backgroundImage: NetworkImage(
-              'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
+          // FOTO DE PERFIL COM MOLDURA, ENQUADRAMENTO E PROTEÇÃO CONTRA ERRO
+          Container(
+            width: 112,
+            height: 112,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.blueAccent,
+              border: Border.all(color: Colors.white, width: 4),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 8,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: ClipOval(
+              child: Image.network(
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDy5Y4Ej8JPjBhPw2B-kdtbUE00LeF3fNhb8WFsYyrSvmmHI8UzW-TanJi&s=10',
+                fit: BoxFit.cover, // Preenche o círculo sem achatar a imagem
+                alignment: Alignment.topCenter, // Evita cortar o rosto
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return const Center(
+                    child: CircularProgressIndicator(color: Colors.white),
+                  );
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  // Fallback caso o navegador bloqueie a imagem externa (CORS)
+                  return const Icon(
+                    Icons.person,
+                    size: 60,
+                    color: Colors.white,
+                  );
+                },
+              ),
             ),
           ),
           const SizedBox(height: 15),
           const Text(
-            'Seu Nome Aqui',
+            'Gaby Leal Almeida',
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -91,7 +116,7 @@ class CartaoCracha extends StatelessWidget {
           ),
           const Divider(height: 30, thickness: 1),
 
-          // EXERCÍCIO 2: Seção "Sobre Mim" com breve biografia
+          // Seção "Sobre Mim"
           const Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -105,17 +130,13 @@ class CartaoCracha extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           const Text(
-            'Apaixonado(a) por desenvolvimento mobile, criação de interfaces fluidas e resolução de problemas com código limpo.',
+            'Sou estudante em desenvolvimento de tecnologia, e procuro melhorias para meu aprendizado',
             textAlign: TextAlign.justify,
-            style: TextStyle(
-              fontSize: 13,
-              color: Colors.black54,
-              height: 1.4,
-            ),
+            style: TextStyle(fontSize: 13, color: Colors.black54, height: 1.4),
           ),
           const SizedBox(height: 16),
 
-          // EXERCÍCIO 3: Badges de habilidades (skills) com Chip dentro de uma Row
+          // Badges de habilidades
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -138,7 +159,7 @@ class CartaoCracha extends StatelessWidget {
           ),
           const Divider(height: 30, thickness: 1),
 
-          // Contatos originais
+          // Contatos
           const Row(
             children: [
               Icon(Icons.email, color: Colors.blueAccent),
